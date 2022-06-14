@@ -1,0 +1,2 @@
+,Graph,Nodes,Edges,Density,Core Size,Generators,CoreIterations,Intersection Loss,Exact Runtime
+,com-dblp.ungraph_component,317080,1049866,0.000010,90077,10,3,"9|0",70168.612805

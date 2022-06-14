@@ -1,0 +1,3 @@
+,Graph,Nodes,Edges,Density,Core Size,Generators,CoreIterations,Intersection Loss,Exact Runtime
+,Wiki-Vote_component,7066,100736,0.002018,4579,10,3,"2|0",130.952961
+,Wiki-Vote_component,7066,100736,0.002018,4579,10,50,"2|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0"|0",1381.121693

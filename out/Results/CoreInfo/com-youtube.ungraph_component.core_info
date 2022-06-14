@@ -1,0 +1,2 @@
+,Graph,Nodes,Edges,Density,Core Size,Generators,CoreIterations,Intersection Loss,Exact Runtime,Avg. Preclosure Depth
+,com-youtube.ungraph_component,1134890,2987624,0.000002,390825,10,3,"8|0",894779.205608,0.000000

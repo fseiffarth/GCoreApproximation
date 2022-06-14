@@ -1,0 +1,2 @@
+,Graph,Nodes,Edges,Density,Core Size,Generators,CoreIterations,Intersection Loss,Exact Runtime
+,com-amazon.ungraph_component,334863,925872,0.000008,216109,10,3,"16|0",220345.706893

@@ -1,0 +1,2 @@
+,Graph,Nodes,Edges,Density,Core Size,Generators,CoreIterations,Intersection Loss,Exact Runtime
+,CA-CondMat_component,21363,91342,0.000200,8603,10,3,"11|0",395.337390
