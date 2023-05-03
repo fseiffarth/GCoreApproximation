@@ -3,7 +3,7 @@
 
 ## [Precomputed cores and core information](out/Results/CoreInfo/)
 
-## Code usage and reproduction of the results:
+## Build Code:
 
 1. > Clone this repository and navigate into *GCoreApproximation* folder: ```git clone https://github.com/fseiffarth/GCoreApproximation.git && cd GCoreApproximation```
 2. > Create folders *GraphData* and *ExternalLibraries* with the Snap-6.0 library in the parent folder of *GCoreApproximation*: ```mkdir ../GraphData && mkdir ../ExternalLibraries && unzip Snap-6.0.zip -d ../ExternalLibraries/``` (the original version can be found [here](http://snap.stanford.edu/releases/Snap-6.0.zip)
@@ -11,6 +11,9 @@
    ```mkdir build && cd build && cmake .. && make -j 4```
 4. > Download the graphs from http://snap.stanford.edu/data/index.html and save unpacked *.txt* in the *GraphData* folder
 5. > Convert the graphs to the used format: ```./ConvertGraphs```
+
+### Run Core Experiment
+
 6. > Move precomputed cores to the right place: ```cp -a out/Results/CoreInfo/. ../GraphData/```
 7. > Compile and run the executables:
    1. > ```./ExpSamplingRuntime``` for sampling runtime experiment (output is written to *out/Results/Closure/*)
