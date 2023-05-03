@@ -6,7 +6,7 @@
 ## Build Code:
 
 1. > Clone this repository and navigate into *GCoreApproximation* folder: ```git clone https://github.com/fseiffarth/GCoreApproximation.git && cd GCoreApproximation```
-2. > Create folders *GraphData* and *ExternalLibraries* with the Snap-6.0 library in the parent folder of *GCoreApproximation*: ```mkdir ../GraphData && mkdir ../ExternalLibraries && unzip Snap-6.0.zip -d ../ExternalLibraries/``` (the original version can be found [here](http://snap.stanford.edu/releases/Snap-6.0.zip)
+2. > Create folders *GraphData* and *ExternalLibraries* with the Snap-6.0 library in the parent folder of *GCoreApproximation*: ```mkdir ../GraphData && mkdir ../ExternalLibraries && unzip Snap-6.0.zip -d ../ExternalLibraries/``` (the original version can be found [here](http://snap.stanford.edu/releases/Snap-6.0.zip))
 3. > Create build inside *GCoreApproximation* folder and compile:
    ```mkdir build && cd build && cmake .. && make -j 4```
 4. > Download the graphs from http://snap.stanford.edu/data/index.html and save unpacked *.txt* in the *GraphData* folder
