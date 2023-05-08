@@ -113,6 +113,30 @@ void StaticFunctions::save(const std::string &path,const std::vector<double> &va
         file.close();
     }
 }
+
+
+void StaticFunctions::save(const std::string &path, const std::set<NodeId> &values, const std::string& extension) {
+    std::string complete_path = path + extension;
+
+    if (extension.find("bin") != std::string::npos){
+        std::ofstream file(complete_path, std::ios::out | std::ios::binary);
+        size_t size = (values.size());
+        file.write((char*) (&size), sizeof(size_t));
+        for (auto const val: values) {
+            file.write((char*) (&val), sizeof(double));
+        }
+        file.close();
+    }
+    else {
+        std::ofstream file(complete_path, std::ios::out);
+        for (auto const val: values) {
+            file << val << std::endl;
+        }
+        file.close();
+    }
+}
+
+
 void StaticFunctions::load(const std::string &path, std::vector<double> &values) {
     std::string extension = std::filesystem::path(path).extension();
     if (extension.find("bin") != std::string::npos){
@@ -151,6 +175,22 @@ void StaticFunctions::load(const std::string& path, TIntV &NodeIds){
         }
         infile.close();
     }
+}
+
+bool StaticFunctions::load(const std::string& path, std::vector<NodeId> &NodeIds){
+    if (std::filesystem::exists(path)) {
+        int a;
+        std::string line;
+        std::ifstream infile(path);
+        while (std::getline(infile, line)) {
+            std::istringstream iss(line);
+            iss >> a;
+            NodeIds.emplace_back(a);
+        }
+        infile.close();
+        return true;
+    }
+    return false;
 }
 
 void StaticFunctions::load_csv(const std::string &path, std::vector<std::vector<std::string>>& out, const char& delimiter) {

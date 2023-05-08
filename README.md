@@ -12,10 +12,18 @@
 4. > Download the graphs from http://snap.stanford.edu/data/index.html and save unpacked *.txt* in the *GraphData* folder
 5. > Convert the graphs to the used format: ```./ConvertGraphs```
 
+
+### Run Geodesic Closure Operator
+
+1. > Run the executable to compute the geodesic closure of set of graph vertices:
+   > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file)```
+
+
+
 ### Run Core Experiment
 
-6. > Move precomputed cores to the right place: ```cp -a out/Results/CoreInfo/. ../GraphData/```
-7. > Compile and run the executables:
+1. > Move precomputed cores to the right place: ```cp -a out/Results/CoreInfo/. ../GraphData/```
+2. > Run the executables:
    1. > ```./ExpSamplingRuntime``` for sampling runtime experiment (output is written to *out/Results/Closure/*)
    2. > ```./ExpSamplingQuality``` for sampling quality experiment (output is written to *out/Results/Sampling/*)
    3. > ```./ExpClosureRuntime``` for closure runtime experiment   (output is written to *out/Results/Sampling/*)

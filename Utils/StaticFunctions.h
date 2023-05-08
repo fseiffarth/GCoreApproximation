@@ -40,6 +40,7 @@ public:
     static void save(const std::string& path,const TIntV& NodeIds, const std::string& extension = "core");
 
     static void load(const std::string &path, TIntV &NodeIds);
+    static bool load(const std::string &path, std::vector<NodeId> &NodeIds);
     static void load_csv(const std::string &path, std::vector<std::vector<std::string>>& out, const char& delimiter = ',');
 
     // Comparison function to sort the vector elements
@@ -51,6 +52,7 @@ public:
     }
 
     static void save(const std::string &path, const std::vector<double> &values, const std::string &extension);
+    static void save(const std::string &path, const std::set<NodeId> &values, const std::string &extension = ".txt");
 
     static void load(const std::string &path, std::vector<double> &values);
 
@@ -58,6 +60,17 @@ public:
 
     static void getClosedFromApproximation(std::vector<NodeId> &approximation, std::set<NodeId> &closedSet, int iterations,
                                            double threshold);
+
+    static void ArgumentList(char** argv, int argc, int i, std::vector<std::string>& output) {
+        output.clear();
+        for (int j = i + 1; j < argc; ++j) {
+            if (std::string(argv[j]).find("--") != std::string::npos) {
+                break;
+            } else {
+                output.emplace_back(argv[j]);
+            }
+        }
+    }
 };
 
 template <class T1, class T2>
