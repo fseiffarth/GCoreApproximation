@@ -52,8 +52,20 @@ int main(int argc, char *argv[]) {
         }
         GraphData g = GraphData(in_path);
         GraphData graph = GraphData(GraphFunctions::ResetGraphIds(g.get_graph()));
+        auto start = std::chrono::steady_clock::now();
         gc.naive_closure(graph, closureParameters);
+        auto end = std::chrono::steady_clock::now();
+        auto time = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() / 1e6;
         std::set<NodeId> closed_set = closureParameters.closed_set;
+
+        std::cout << "Computed the geodesic closure";
+        if (distance_threshold != std::numeric_limits<int>::max()){
+            std::cout << "(with threshold distance " << distance_threshold << ")";
+        }
+        std::cout << " in " << time << "s" << std::endl;
+        std::cout << "\tNumber of generators: " << closureParameters.input_set.size() << std::endl;
+        std::cout << "\tClosed set size: " << closureParameters.closed_set.size() << std::endl;
+
         StaticFunctions::save(out_path, closed_set);
     }
     else{
