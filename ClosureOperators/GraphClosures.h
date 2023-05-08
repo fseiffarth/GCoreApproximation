@@ -41,7 +41,7 @@ private:
                                       int closedIntervalSetSize, int possiblePaths);
     bool backward_step(GraphData &DataObject, NodeId element, std::set<NodeId> &closed_interval_set, std::deque<NodeId>& bfsQueue, const std::vector<std::set<NodeId> *> &forbidden_elements, bool &output_intersects_forbidden,
                        std::set<NodeId> &new_elements);
-    int _threshold;
+    int _threshold = std::numeric_limits<int>::max();
     std::chrono::time_point<std::chrono::system_clock> time;
 
     bool incrementalStep(GraphData &graph, NodeId newElement, ClosureParameters &closureParameters);
