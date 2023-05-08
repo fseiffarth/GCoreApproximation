@@ -120,6 +120,9 @@ void GraphClosureSP::bfs_forward(GraphData &graph, std::set<NodeId>& target_set,
         NodeId currentNodeId = bfsQueue.back();
         bfsQueue.pop_back();
         int currentDistance = graph.DistanceList[currentNodeId];
+        if (currentDistance + 1 > this->_threshold){
+            break;
+        }
         if ((visitedSize == target_set.size() && graph.DistanceList[currentNodeId] > lastDistance)) {
             break;
         }

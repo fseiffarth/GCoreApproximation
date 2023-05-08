@@ -129,8 +129,15 @@ void StaticFunctions::save(const std::string &path, const std::set<NodeId> &valu
     }
     else {
         std::ofstream file(complete_path, std::ios::out);
+        int counter = 0;
         for (auto const val: values) {
-            file << val << std::endl;
+            ++counter;
+            if (counter == values.size()){
+                file << val;
+            }
+            else {
+                file << val << std::endl;
+            }
         }
         file.close();
     }

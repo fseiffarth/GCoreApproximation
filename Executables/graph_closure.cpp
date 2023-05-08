@@ -13,7 +13,8 @@ int main(int argc, char *argv[]) {
     std::string out_path;
     std::vector<std::string> node_id_str;
     std::vector<NodeId> node_ids;
-    std::string help = "Parameters: \n -i \t Input path for the graph \n -o \t Output path for the closure \n -ids \t list of vertex ids for calculating the closure, e.g. <0 1 2> or path to file of vertex ids for calculating the closure (one id per line)";
+    int distance_threshold = std::numeric_limits<int>::max();
+    std::string help = "Parameters: \n\t -i \t Input path for the graph \n\t -o \t Output path for the closure \n\t -ids \t list of vertex ids for calculating the closure, e.g. <0 1 2> or path to file of vertex ids for calculating the closure (one id per line) \n\t [-dist distance threshold for the closure (optional)]";
 
     for (int i = 0; i < argc; ++i) {
         std::string str = argv[i];
@@ -38,10 +39,13 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+        if (std::strcmp(argv[i], "-dist") == 0) {
+            distance_threshold = std::stoi(argv[i + 1]);
+        }
     }
 
     if(!in_path.empty() && !out_path.empty()) {
-        GraphClosureSP gc;
+        GraphClosureSP gc = GraphClosureSP("", distance_threshold);
         ClosureParameters closureParameters;
         for (auto & val : node_ids) {
             closureParameters.input_set.emplace(val);
