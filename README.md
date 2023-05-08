@@ -17,7 +17,7 @@
 
 1. > Run the executable to compute the geodesic closure of set of graph vertices:
 
-   > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file)```
+   > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file) [-dist threshold for the geodesic closure based on the distance in the graph (optional)]```
 
 
 
