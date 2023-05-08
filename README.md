@@ -16,6 +16,7 @@
 ### Run Geodesic Closure Operator
 
 1. > Run the executable to compute the geodesic closure of set of graph vertices:
+
    > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file)```
 
 
