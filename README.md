@@ -60,8 +60,9 @@
 
 #### Getting the results
 
-- The _*.core_ file in _../../GraphData/_ contains the node ids of the core nodes. The _*.core_info_ contains some information about the size, runtime etc.
-- The _*.approx_core_ file in _../../GraphData/_ contains the node ids of the nodes in the approximated core.
+- The _*.core_ file in _../../GraphData/_ contains the node ids of the core nodes *(relabeled from 0 to n-1)*. 
+- The _*.core_info_ contains some information about the size, runtime etc.
+- The _*.approx_core_ file in _../../GraphData/_ contains the node ids of the nodes in the approximated core *(relabeled from 0 to n-1)*.
 - The _custom_experiment.csv_ and *custom_experiment_summary.csv* files in */out/Approximation/* contain all resp. a summary of the most important results (e.g., runtime, similarity).
 
 
