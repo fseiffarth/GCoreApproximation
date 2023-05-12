@@ -21,13 +21,16 @@
 >   2. > ```./ExpSamplingQuality``` for sampling quality experiment (output is written to *out/Results/Sampling/*)
 >   3. > ```./ExpClosureRuntime``` for closure runtime experiment   (output is written to *out/Results/Sampling/*)
 >   4. > ```./ExpApproxCore``` for approximate core computation (either you have to compute the cores first (see v.) or use the precomputed cores). To run the experiments from the paper use the below commands (output is written to *out/Results/Approximation/*)
->      >- *Grid Search*
+>       > 
+>      > *Grid Search*
 >      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 5 10 100 500 1000 --threshold 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1 0.15 --threads 2 --outer_loop 0 --small_graphs --no_tree --file_name grid_search_small```
 >      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 5 10 100 500 1000 --threshold 0.01 0.02 0.03 0.04 0.05 0.06 0.07 0.08 0.09 0.1 0.15 --threads 3 --outer_loop 0 --large_graphs --no_tree --file_name grid_search_large```
->      >- *Iterative Approx*
+>      >
+>      >*Iterative Approx*
 >      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 2 --outer_loop 1 --no_tree --small_graphs --file_name iteration__small```
 >      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 3 --outer_loop 1 --no_tree --large_graphs --file_name iteration__large```
->      >- *Very large Graphs* (compute approx core of the graphs without knowing the exact core)
+>      >
+>      >*Very large Graphs* (compute approx core of the graphs without knowing the exact core)
 >      >  - ```./ExpApproxCore -i ../../GraphData/RealWorld/ --generators 5 10 --threshold 0.01 0.02 --threads 2 --outer_loop 0 --save_load_samples --no_tree --no_core --file_name large_graphs```
 >      >
 >      >| Optional Arguments | ```-i```  | ```-o```  | ```--threads```  | ```--generators``` | ```--generator_seed``` | ```--threshold``` | ```--core_iterations```  | ```--samples``` | ```--sample_seed```  | ```--max_nodes``` | ```--max_edges``` |
