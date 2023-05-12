@@ -39,3 +39,5 @@
 /out/Other/
 /out/closure.txt
 /out/ids.txt
+/cmake-build-relwithdebinfo/
+/cmake-build-minsizerel/
