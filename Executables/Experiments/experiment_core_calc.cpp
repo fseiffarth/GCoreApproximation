@@ -50,7 +50,7 @@ void get_core(GraphData& graph, int generator_size, int core_iterations, int see
     avg_preclosure_steps = 0;
     auto start = std::chrono::high_resolution_clock::now();
     for (int i = 0; i < core_iterations; ++i) {
-        std::cout << "Iteration " << std::to_string(i) << " of graph " << graph.getName() << " started" << std::endl;
+        std::cout << "\tIteration " << std::to_string(i) << " of graph " << graph.getName() << " started" << std::endl;
         StaticFunctions::generateInputSet(closureParameters.input_set, graph, generator_size, i + core_iterations * seed);
         gc.naive_closure(graph, closureParameters);
         avg_preclosure_steps += closureParameters.preclosure_steps;
@@ -67,8 +67,8 @@ void get_core(GraphData& graph, int generator_size, int core_iterations, int see
             overlap.insert(v_intersection.begin(), v_intersection.end());
             intersection_loss.emplace_back(overlap_size - overlap.size());
         }
-        std::cout << "Iteration " << std::to_string(i) << " of graph " << graph.getName() << " finished after " << std::to_string(((double) std::chrono::duration_cast<std::chrono::microseconds>(
-                std::chrono::high_resolution_clock::now() - start).count() /1000000.0)) << "s"  << std::endl;
+        std::cout << "\tIteration " << std::to_string(i) << " of graph " << graph.getName() << " finished after " << std::to_string(((double) std::chrono::duration_cast<std::chrono::microseconds>(
+                std::chrono::high_resolution_clock::now() - start).count() /1000000.0)) << "s"  << std::endl << std::endl;
     }
     coreNodes.Clr();
     for (auto elem: overlap) {
@@ -107,6 +107,7 @@ void core_calc(OverlapApproxParams& params) {
 
         FileEvaluation eval = FileEvaluation(stripped_path, "", ".core_info");
         GraphData graph = GraphData(path);
+        std::string name = graph.getName();
         GraphFunctions::GetLargestComponent(graph);
         eval.headerValueInsert({"Graph", "Nodes", "Edges", "Density"}, {graph.getName(), std::to_string(graph.nodes()), std::to_string(graph.edges()), std::to_string(graph.density())});
 
@@ -127,7 +128,8 @@ void core_calc(OverlapApproxParams& params) {
         //GraphFunctions::analyse_graph(core_graph.get_graph(), "Core");
 
         std::stringstream sstream;
-        sstream << "Graph " << graph.getName() << " Exact Runtime: " << exact_runtime << "s" << std::endl;
+        sstream << "Graph " << graph.getName() << ":" << std::endl;
+        sstream << "\tComputed Exact Core in: " << exact_runtime << "s" << std::endl;
         StaticFunctions::PrintStream(sstream);
         eval.save();
     }

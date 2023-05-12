@@ -11,15 +11,7 @@
    ```mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 4```
 4. > Download the graphs from http://snap.stanford.edu/data/index.html and save unpacked *.txt* in the *GraphData* folder
 5. > Convert the graphs to the used format: ```./ConvertGraphs```
-
-
-### Run Geodesic Closure Operator
-
-1. > Run the executable to compute the geodesic closure of set of graph vertices:
-
-   > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file) [-dist threshold for the geodesic closure based on the distance in the graph (optional)]```
-
-
+   
 
 ### Run Core Experiment
 
@@ -57,6 +49,34 @@
        >>| :---:   | :-: | :-: | :------------: | :-----------------: | :------------------: | :------------: | :------------: |
        >>| Seconds | input path | thread num | generator number | generator seed | iterations of the core | max graph size | max graph edges |
        
-       
-       
+
+### Run Custom Core Approximation Experiment
+
+#### With Core Computation
+
+1. > Compute the Core of your graph(s) with <br> ```./ExpExactCore -i ../../GraphData/ --threads 4 --recalculate```
+2. > Compute the Approximate Cores with <br> ```./ExpApproxCore -i ../../GraphData/ --generators 5 --threshold 0.01 --threads 4 --outer_loop 0 --no_tree --file_name custom_experiment```
+
+
+- Add the argument ```--save_load_samples```, if the samples are too large to fit in the RAM, use ```--no_core``` **only** if no core was computed before
+
+#### Without Core Computattion
+1. > Compute the Approximate Cores with <br> ```./ExpApproxCore -i ../../GraphData/ --generators 5 --threshold 0.01 --threads 4 --outer_loop 0 --no_tree --no_core --file_name custom_experiment```
+
+- Add the argument ```--save_load_samples```, if the samples are too large to fit in the RAM, use ```--no_core``` **only** if no core was computed before
+
+#### Getting the results
+
+- The _*.core_ file in _../../GraphData/_ contains the node ids of the core nodes. The _*.core_info_ contains some information about the size, runtime etc.
+- The _*.approx_core_ file in _../../GraphData/_ contains the node ids of the nodes in the approximated core.
+- The _custom_experiment.csv_ and *custom_experiment_summary.csv* files contain all resp. a summary of the most important results (e.g., runtime, similarity).
+
+
+### Run Geodesic Closure Operator
+
+1. > Run the executable to compute the geodesic closure of set of graph vertices:
+
+   > ```./GraphClosure -i path/to/graph.txt -o path/to/output -ids path/to/input_ids.txt (one id per line in the file) [-dist threshold for the geodesic closure based on the distance in the graph (optional)]```
+
+
        

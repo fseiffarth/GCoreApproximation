@@ -108,6 +108,7 @@ void simple_approx(GraphData &graph, int generator_size, int core_iterations, in
     runtime = ((double) std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - start).count() /
                1000000.0);
+    std::cout << "Computed the Approximate Core in " << runtime << "s" << std::endl;
 }
 
 void approximate_core(GraphData& graph, std::vector<GraphData>& samples, int generator_size, OverlapApproxParams& params, std::map<int, int>& degree_distribution, std::vector<TIntV>& coreNodes, double& runtime){
@@ -118,8 +119,10 @@ void approximate_core(GraphData& graph, std::vector<GraphData>& samples, int gen
     runtime = 0;
     std::chrono::time_point<std::chrono::system_clock> start = std::chrono::high_resolution_clock::now();
     std::vector<int> approximation = std::vector<int>(graph.size(), 0);
-
     std::vector<std::set<NodeId>> coreSets = std::vector<std::set<NodeId>>(params.threshold.size(), std::set<NodeId>());
+
+    std::cout << "Graph " << graph.getName() << " Compute Approximate Core:" << std::endl;
+
     for (int i = 0; i < params.coreIterations; ++i) {
         StaticFunctions::generateInputSet(closureParameters.input_set, graph, generator_size, i + params.coreIterations * params.generator_seed);
         int sample_number = (int) samples.size();
@@ -137,8 +140,7 @@ void approximate_core(GraphData& graph, std::vector<GraphData>& samples, int gen
                     StaticFunctions::getClosedFromApproximation(approximation, closureParameters.closed_set,
                                                                 (int) sample_number,params.threshold[j]);
                 }
-
-                std::cout << "\tClosure Size: " << closureParameters.closed_set.size() << std::endl;
+                std::cout << "\tIteration " << i << " Approximate Closure Size: " << closureParameters.closed_set.size() << std::endl;
 
                 if (i == 0) {
                     coreSets[j] = closureParameters.closed_set;
@@ -158,7 +160,7 @@ void approximate_core(GraphData& graph, std::vector<GraphData>& samples, int gen
                     }
                     coreSets[j].erase(it1, coreSets[j].end());
                 }
-                std::cout << "\tCore Size: " << coreSets[j].size() << std::endl;
+                std::cout << "\tIteration " << i << "\tApproximate Core Size: " << coreSets[j].size() << std::endl;
             }
         }
         else{
@@ -182,6 +184,7 @@ void approximate_core(GraphData& graph, std::vector<GraphData>& samples, int gen
     runtime = ((double) std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - start).count() /
                1000000.0);
+    std::cout << "Computed the Approximate Core in " << runtime << "s" << std::endl;
 }
 
 void approximate_core(GraphData& graph, std::vector<OuterplanarGraphData>& samples, int generator_size, OverlapApproxParams& params, std::map<int, int>& degree_distribution, std::vector<TIntV>& coreNodes, double& runtime){
@@ -192,8 +195,10 @@ void approximate_core(GraphData& graph, std::vector<OuterplanarGraphData>& sampl
     runtime = 0;
     std::chrono::time_point<std::chrono::system_clock> start = std::chrono::high_resolution_clock::now();
     std::vector<int> approximation = std::vector<int>(graph.size(), 0);
-
     std::vector<std::set<NodeId>> coreSets = std::vector<std::set<NodeId>>(params.threshold.size(), std::set<NodeId>());
+
+    std::cout << "Graph " << graph.getName() << " Compute Approximate Core:" << std::endl;
+
     for (int i = 0; i < params.coreIterations; ++i) {
         StaticFunctions::generateInputSet(closureParameters.input_set, graph, generator_size, i + params.coreIterations * params.generator_seed);
         int sample_number = (int) samples.size();
@@ -211,7 +216,7 @@ void approximate_core(GraphData& graph, std::vector<OuterplanarGraphData>& sampl
                                                                 (int) sample_number,params.threshold[j]);
                 }
 
-                std::cout << "\tClosure Size: " << closureParameters.closed_set.size() << std::endl;
+                std::cout << "\tIteration " << i << " Approximate Closure Size: " << closureParameters.closed_set.size() << std::endl;
 
                 if (i == 0) {
                     coreSets[j] = closureParameters.closed_set;
@@ -231,7 +236,7 @@ void approximate_core(GraphData& graph, std::vector<OuterplanarGraphData>& sampl
                     }
                     coreSets[j].erase(it1, coreSets[j].end());
                 }
-                std::cout << "\tCore Size: " << coreSets[j].size() << std::endl;
+                std::cout << "\tIteration " << i << "\tApproximate Core Size: " << coreSets[j].size() << std::endl;
             }
         }
         else{
@@ -255,6 +260,7 @@ void approximate_core(GraphData& graph, std::vector<OuterplanarGraphData>& sampl
     runtime = ((double) std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - start).count() /
                1000000.0);
+    std::cout << "Computed the Approximate Core in " << runtime << "s" << std::endl;
     if (params.save_outerplanar_approx) {
         for(int j = 0; j < coreNodes.size(); ++j) {
             StaticFunctions::save(params.stripped_path, coreNodes[j],
@@ -328,7 +334,7 @@ void overlap_eval(OverlapApproxParams& params) {
         std::vector<std::vector<std::string>> info_array;
         if (exact_computation) {
             StaticFunctions::load_csv(params.stripped_path + ".core_info", info_array);
-            exact_runtime = std::stoi(info_array[1][9]);
+            exact_runtime = std::stod(info_array[1][9]);
         }
         GraphData graph = GraphData(path);
         //std::cout << "Graph Nodes: " << graph.nodes() << std::endl;

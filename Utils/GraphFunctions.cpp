@@ -1175,6 +1175,7 @@ void GraphFunctions::GetLargestComponent(GraphData &data, bool renumber) {
     TCnComV ConComps;
     TSnap::GetWccs(data.get_graph(), ConComps);
     if (ConComps.Len() == 1) {
+        data = GraphData(GraphFunctions::ResetGraphIds(data.get_graph()), data.getName());
         std::cout << "Graph " << data.getName() << " is connected!" << std::endl;
     } else {
         std::cout << "Graph " << data.getName() << " is not connected!" << std::endl;
@@ -1376,7 +1377,7 @@ void GraphFunctions::GetSamples(GraphData &graph, PatternType type, std::vector<
                     }
                 }
                 if (p) {
-                    std::cout << "Generated tree sample " << j + 1 << "/" << samples << " of " << graph.getName()
+                    std::cout << "\t Generated tree sample " << j + 1 << "/" << samples << " of " << graph.getName()
                               << std::endl;
                 }
                 break;
@@ -1401,7 +1402,7 @@ void GraphFunctions::GetSamples(GraphData &graph, PatternType type, std::vector<
                     }
                 }
                 if (p) {
-                    std::cout << "Generated outerplanar sample " << j + 1 << "/" << samples << " of " << graph.getName()
+                    std::cout << "\t Generated outerplanar sample " << j + 1 << "/" << samples << " of " << graph.getName()
                               << std::endl;
                 }
                 break;
@@ -1410,6 +1411,7 @@ void GraphFunctions::GetSamples(GraphData &graph, PatternType type, std::vector<
     runtime = ((double) std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::high_resolution_clock::now() - start_generation).count() /
                1000000.0);
+    std::cout << "Generated " << samples << " Outerplanar Samples in " << runtime << "s" << std::endl;
 }
 
 void GraphFunctions::GetOuterplanarSamples(GraphData &graph, PatternType type, std::vector<OuterplanarGraphData> &subgraphs,
@@ -1475,6 +1477,7 @@ void GraphFunctions::GetOuterplanarSamples(GraphData &graph, PatternType type, s
             std::chrono::high_resolution_clock::now() - start_generation).count() /
                1000000.0);
     runtime -= conversion_runtime;
+    std::cout << std::endl << "Generated " << samples << " Outerplanar Samples in " << runtime + conversion_runtime << "s" << std::endl << std::endl;
 }
 
 void GraphFunctions::GetCoreGraphStats(GraphData &graph, TIntV &coreNodes, double runtime, const std::string& core_name, FileEvaluation* fileEvaluation) {
