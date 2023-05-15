@@ -33,7 +33,7 @@
 >      >
 >      > 
 >      >*Very large Graphs* (compute approx core of the graphs without knowing the exact core)
->      >  - ```./ExpApproxCore -i ../../GraphData/RealWorld/ --generators 5 10 --threshold 0.01 0.02 --threads 2 --outer_loop 0 --save_load_samples --no_tree --no_core --file_name large_graphs```
+>      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 5 10 --threshold 0.01 0.02 --threads 2 --outer_loop 0 --save_load_samples --no_tree --no_core --file_name large_graphs```
 >      >
 >      >| Optional Arguments | ```-i```  | ```-o```  | ```--threads```  | ```--generators``` | ```--generator_seed``` | ```--threshold``` | ```--core_iterations```  | ```--samples``` | ```--sample_seed```  | ```--max_nodes``` | ```--max_edges``` |
 >      >| :---:   | :-: | :-: | :-: | :------------: | :-----------------: | :------------------: | :------------------: | :------------: | :------------: | :------------: | :------------: |
