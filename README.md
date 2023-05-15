@@ -28,8 +28,8 @@
 >      >
 >      > 
 >      >*Iterative Approx*
->      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 2 --outer_loop 1 --no_tree --small_graphs --file_name iteration__small```
->      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 3 --outer_loop 1 --no_tree --large_graphs --file_name iteration__large```
+>      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 2 --outer_loop 1 --no_tree --small_graphs --file_name iteration_small```
+>      >  - ```./ExpApproxCore -i ../../GraphData/ --generators 10 --threshold 0.01 --threads 3 --outer_loop 1 --no_tree --large_graphs --file_name iteration_large```
 >      >
 >      > 
 >      >*Very large Graphs* (compute approx core of the graphs without knowing the exact core)
