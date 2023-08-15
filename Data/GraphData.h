@@ -85,5 +85,7 @@ public:
     void init();
 
     void UpdateSingletons(const std::string &graphPath);
+
+    std::vector<NodeId> get_neighbors(NodeId i) const;
 };
 #endif //CLOSURES_GRAPHDATA_H

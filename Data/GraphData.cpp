@@ -11,6 +11,12 @@
 
 //TODO new format first line is node number of the graph (for old format use Update)
 GraphData::GraphData(const std::string &graphPath) : Data<PUNGraph>(new TUNGraph()) {
+    // Check if file is good
+    if (!std::filesystem::exists(graphPath)) {
+        std::cout << "Error occurred the path is not correct!" << std::endl;
+        exit(-1);
+    }
+
     if (std::filesystem::path(graphPath).extension() == ".edges" || std::filesystem::path(graphPath).extension() == ".txt") {
         try {
             NodeId src;
@@ -495,6 +501,15 @@ void GraphData::ReadBinary(const std::string &graphPath) {
 
 void GraphData::save_bin(const std::string &path) const {
     WriteBinary(path);
+}
+
+// Get the neighbors of a node as a vector
+std::vector<NodeId> GraphData::get_neighbors(NodeId i) const {
+    std::vector<NodeId> neighbors;
+    for (int j = 0; j < degree(i); ++j) {
+        neighbors.emplace_back(neighbor(i, j));
+    }
+    return neighbors;
 }
 
 
