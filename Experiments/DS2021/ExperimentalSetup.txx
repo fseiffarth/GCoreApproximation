@@ -649,7 +649,7 @@ void ExperimentalSetup::analyzeFaces(GenerationType generationType) {
     }
 }
 
-void ExperimentalSetup::savePatternGenerationRuntimes(const GraphData& graphData, double density, int connection, float perPatternTime,
+void ExperimentalSetup::savePatternGenerationRuntimes(const GraphData& graph, double density, int connection, float perPatternTime,
                                                       int patternNum, int graphNum, GenerationType generationType, PatternType patternType) {
     std::string path = resultPath + "/GenerationRuntimes/"+ resultsName + "_GenerationRuntimes.csv";
     bool newFile = std::filesystem::exists(path);
@@ -680,7 +680,7 @@ void ExperimentalSetup::savePatternGenerationRuntimes(const GraphData& graphData
             break;
     }
 
-    fs << std::fixed << "," << graphData.getName() << "," << graphData.size() << "," << graphData.get_data()->GetEdges() << "," << density << "," << connection << "," << patternTypeString << "," << perPatternTime / (float) patternNum << "," << graphNum << ","
+    fs << std::fixed << "," << graph.getName() << "," << graph.size() << "," << graph.get_data()->GetEdges() << "," << density << "," << connection << "," << patternTypeString << "," << perPatternTime / (float) patternNum << "," << graphNum << ","
        << patternNum << "," << generationTypeString << std::endl;
 
     fs << std::scientific;

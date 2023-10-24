@@ -18,17 +18,17 @@ struct CoreGrowAlgorithmInputParameters {
 };
 
 struct CoreGrowAlgorithmOutputParameters {
-    std::vector<NodeId> core_nodes;
-    double runtime;
+    std::vector<NodeId> core_nodes = std::vector<NodeId>();
+    double runtime = 0.0;
 };
 
 class CoreGrowAlgorithm { ;
 
-    GraphData& graphData;
+    GraphData& graph;
 public:
     void Run(CoreGrowAlgorithmOutputParameters& outputParameters, const CoreGrowAlgorithmInputParameters& inputParameters);
 
-    explicit CoreGrowAlgorithm(GraphData &graphData) : graphData(graphData) {}
+    explicit CoreGrowAlgorithm(GraphData &graphData) : graph(graphData) {}
 };
 
 

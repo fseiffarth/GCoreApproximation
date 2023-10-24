@@ -6,7 +6,6 @@
 #include <deque>
 #include "GraphFunctions.h"
 #include "GraphStructs.h"
-#include "directed_graph.h"
 #include "StaticFunctions.h"
 #include "../Data/OuterplanarGraphData.h"
 #include "Enums.h"

@@ -12,27 +12,29 @@
 
 void CoreGrowAlgorithm::Run(CoreGrowAlgorithmOutputParameters& outputParameters, const CoreGrowAlgorithmInputParameters& inputParameters)
 {
+    // set start time
+    auto start = std::chrono::high_resolution_clock::now();
     // set the generator using the seed
     std::mt19937 generator(inputParameters.seed);
     // neighbors of the core nodes (in fact the out_edges thus duplicates are possible)
-    std::vector<NodeId> core_neighbors;
+    std::vector<NodeId> core_neighbors = std::vector<NodeId>();
     // vector measuring the size evolution of the core
     std::vector<int> core_size_evolution = std::vector<int>(inputParameters.grow_steps + 1, 0);
     core_size_evolution[0] = 1;
-    std::vector<int> core_nodes = std::vector<int>(graphData.nodes(), 0);
+    std::vector<int> core_nodes = std::vector<int>(graph.nodes(), 0);
     // iterate over the number of runs
     for (int i = 0; i < inputParameters.num_runs; ++i)
     {
         // get the start vertex
-        NodeId start_vertex = std::uniform_int_distribution<NodeId>(0, graphData.nodes() - 1)(generator);
-        core_neighbors = graphData.get_neighbors(start_vertex);
+        NodeId start_vertex = std::uniform_int_distribution<NodeId>(0, graph.nodes() - 1)(generator);
+        core_neighbors = graph.get_neighbors(start_vertex);
 
         // create the graph closure
         GraphClosureSP graphClosureSP = GraphClosureSP();
         // get the closure of the start vertex
         std::set<NodeId> start_set = std::set<NodeId>({start_vertex});
         ClosureParameters closureParameters = ClosureParameters(start_set);
-        graphClosureSP.closure(graphData, closureParameters);
+        graphClosureSP.closure(graph, closureParameters);
 
 
         // iterate over the grow steps
@@ -57,7 +59,7 @@ void CoreGrowAlgorithm::Run(CoreGrowAlgorithmOutputParameters& outputParameters,
             for (auto added_element : closureParameters.added_elements)
             {
                 // get the neighbors of the added element
-                std::vector<NodeId> added_element_neighbors = graphData.get_neighbors(added_element);
+                std::vector<NodeId> added_element_neighbors = graph.get_neighbors(added_element);
                 // iterate over the neighbors of the added element
                 for (auto added_element_neighbor : added_element_neighbors)
                 {
@@ -74,7 +76,7 @@ void CoreGrowAlgorithm::Run(CoreGrowAlgorithmOutputParameters& outputParameters,
             // calculate the closure of the core + the random element
             closureParameters.input_set = closureParameters.closed_set;
             closureParameters.element_to_add = random_element;
-            graphClosureSP.closure(graphData, closureParameters);
+            graphClosureSP.closure(graph, closureParameters);
 
             // track the core growth
             core_size_evolution[i+1] = (int) closureParameters.added_elements.size();
@@ -107,5 +109,6 @@ void CoreGrowAlgorithm::Run(CoreGrowAlgorithmOutputParameters& outputParameters,
             outputParameters.core_nodes.emplace_back(i);
         }
     }
-
+    // set the end time
+    outputParameters.runtime = (double) std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now() - start).count() / 1000.0;
 }

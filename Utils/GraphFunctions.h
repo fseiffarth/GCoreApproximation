@@ -9,7 +9,6 @@
 #include "typedefs.h"
 #include "../Data/GraphData.h"
 #include "GraphStructs.h"
-#include "directed_graph.h"
 #include "FileEvaluation.h"
 #include "Enums.h"
 #include "OuterplanarSubgraphDFS.h"
