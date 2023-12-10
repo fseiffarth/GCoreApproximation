@@ -7,6 +7,7 @@
 
 
 #include "GraphData.h"
+#include <unordered_map>
 
 struct OuterplanarComponent{
     std::vector<PUNGraph> faces;
