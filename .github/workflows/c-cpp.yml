@@ -1,0 +1,21 @@
+name: C++ Ci
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install CMake
+      run: sudo apt-get update && sudo apt-get install -yq cmake
+    - name: Unzip Snap-Lib
+      run: mkdir ../GraphData && mkdir ../ExternalLibraries && unzip Snap-6.0.zip -d ../ExternalLibraries/
+    - name: compile
+      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 16
